@@ -1,0 +1,28 @@
+{
+  "todos": [
+    {
+      "id": 609314632,
+      "description": "Learn AWS",
+      "isDone": true,
+      "targetDate": "2302-12-02"
+    },
+    {
+      "id": 812586319,
+      "description": "Learn Angular 15",
+      "isDone": false,
+      "targetDate": "2023-12-22"
+    },
+    {
+      "id": 3686320234,
+      "description": "Learn Springboot 3",
+      "isDone": false,
+      "targetDate": "2320-12-02"
+    },
+    {
+      "id": 4019232969,
+      "description": "Learn React 18",
+      "isDone": false,
+      "targetDate": "2023-12-23"
+    }
+  ]
+}

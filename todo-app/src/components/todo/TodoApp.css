@@ -1,0 +1,19 @@
+.TodoApp {
+  text-align: left;
+}
+
+#LoginForm {
+  margin: auto;
+  text-align: left;
+  width: 300px;
+}
+
+.todoComponent {
+  margin: auto;
+  text-align: left;
+  width: 1000px;
+}
+
+#dateField {
+  margin-left: 180px;
+}
