@@ -1,12 +1,10 @@
 const mongoose = require('mongoose');
+const { ResourceError } = require('../utils/errors');
 
 const health = async (req, res, next) => {
   try {
     if (!mongoose.connection.readyState === 1) {
-      const error = new Error(`Application error: cannot connect to database instance : statue ${mongoose.connection.readyState}`);
-      error.statusCode = 500;
-      error.isOperational = true;
-      throw error;
+      throw new ResourceError(`Application error: cannot connect to database instance : statue ${mongoose.connection.readyState}`, 500);
     }
 
     return res.status(200).json({ successful: true, status: 200, message: 'ok' });
