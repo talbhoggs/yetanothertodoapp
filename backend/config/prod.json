@@ -1,0 +1,11 @@
+{
+    "NODE_ENV": "default",
+    "API_BASE": "/api/todos",
+    "APP_NAME": "YetAnotherTodo API",
+    "PORT": "4000",
+    "LOGGER": {
+      "LEVEL": "info",
+      "SILENT": false,
+      "JSON": false
+    }
+}
