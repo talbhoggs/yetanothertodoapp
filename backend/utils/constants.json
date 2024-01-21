@@ -1,0 +1,7 @@
+{
+    "ENV": {
+        "PROD":"prod",
+        "DEV":"dev",
+        "TEST":"test"
+    }
+}
