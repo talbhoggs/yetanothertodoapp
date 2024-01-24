@@ -6,9 +6,8 @@
 NODE_ENV=dev
 ```
 
+### Resources
 
-### Kanban Board
-https://trello.com/b/gMqS71oi/todo-app
-
-### Error handling strategy
-https://www.toptal.com/nodejs/node-js-error-handling
+[Entity diagram](https://drive.google.com/file/d/1dOmQqVPsv4RO6gjUZApiTQPyhtqK-Svi/view)
+[Kanban Board](https://trello.com/b/gMqS71oi/todo-app)
+[Error handling strategy](https://www.toptal.com/nodejs/node-js-error-handling)
