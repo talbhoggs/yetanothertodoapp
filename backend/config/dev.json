@@ -1,12 +1,15 @@
 {
     "NODE_ENV": "default",
-    "API_BASE": "/api/todos",
-    "APP_NAME": "YetAnotherTodo API",
+    "API_BASE": "api",
+    "APP_NAME": "yetanothertodo",
+    "API_VERSION": "v1",
     "DATABASE_URI":"mongodb://localhost:27017/todoAPP",
     "PORT": "3500",
     "LOGGER": {
       "LEVEL": "info",
       "SILENT": false,
       "JSON": false
-    }
+    },
+    "REFRESH_TOKEN_EXPIRY": "1d",
+    "ACCESS_TOKEN_EXPIRY": "30s"
 }
