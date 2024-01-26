@@ -1,7 +1,7 @@
 const UserRepository = require('../repository/userRepository');
 const { ResourceError } = require('../utils/errors');
 
-const {hashPassword} = require('../utils')
+const { hashPassword } = require('../utils');
 
 class UserService {
   constructor() {
@@ -10,7 +10,6 @@ class UserService {
 
   async signUp({ username, password }) {
     try {
-
       if (!username || !password) {
         throw new ResourceError('Username and Password are required');
       }
@@ -20,10 +19,45 @@ class UserService {
         throw new ResourceError(`username ${username} is already in use by another user`);
       }
 
-      return await this.userRepository.createUser({ username, password: hashPassword(password)});
+      return await this.userRepository.createUser({ username, password: hashPassword(password) });
     } catch (err) {
       throw err;
-      //throw new ResourceError(`Cannot create ${username}`);
+      // throw new ResourceError(`Cannot create ${username}`);
+    }
+  }
+
+  async updateUser(id, {username, password, active, picturePath}) {
+
+    try {
+      const existingUser = await this.getUserById(id);
+
+      if (!existingUser) {
+        throw new ResourceError('User not found'); '';
+      }
+
+      username, password, active, picturePath
+
+      if (username) {
+        existingUser.username = username;
+      }
+
+      if (password) {
+        existingUser.password = password;
+      }
+
+      if (active) {
+        existingUser.active = active;
+      }
+
+      if (picturePath) {
+        existingUser.picturePath = picturePath;
+      }
+
+      // admin user can only update the roles through admin dashboard
+
+      return await this.userRepository.updateUser(existingUser);
+    } catch (err) {
+      throw err;
     }
   }
 
@@ -35,11 +69,16 @@ class UserService {
     }
   }
 
-  async deleteUser(_id) {
+  async deleteUser({ id }) {
     try {
-      const existingUser = await this.getUserById(_id);
+      if (!id) {
+        throw new ResourceError('id is required');
+      }
+
+      const existingUser = await this.userRepository.getUserById(id);
+
       if (!existingUser) {
-        throw new ResourceError('User not found');
+        throw new ResourceError(`User ${id} not found`);
       }
 
       return await this.userRepository.deleteUser(existingUser);
