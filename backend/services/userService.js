@@ -30,12 +30,9 @@ class UserService {
 
     try {
       const existingUser = await this.getUserById(id);
-
       if (!existingUser) {
-        throw new ResourceError('User not found'); '';
+        throw new ResourceError('User not found');
       }
-
-      username, password, active, picturePath
 
       if (username) {
         existingUser.username = username;
@@ -45,8 +42,8 @@ class UserService {
         existingUser.password = password;
       }
 
-      if (active) {
-        existingUser.active = active;
+      if(active !== undefined && existingUser.active !== Boolean(active)) {
+        existingUser.active = !existingUser.active;
       }
 
       if (picturePath) {
