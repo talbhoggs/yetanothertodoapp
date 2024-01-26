@@ -13,6 +13,14 @@ class UserRepository {
   }
   // update
 
+  async updateUser(existingUser) {
+    try {
+      return await existingUser.save();
+    } catch (err) {
+      throw new ResourceError('Unable to update user');
+    }
+  }
+
   // delete
   async deleteUser(existingUser) {
     try {
@@ -31,11 +39,11 @@ class UserRepository {
     }
   }
 
-  async getUserById(_id) {
+  async getUserById(id) {
     try {
-      return await user.findById({ _id });
+      return await user.findById(id);
     } catch (err) {
-      throw new ResourceError(`User ${_id} not found`);
+      throw new ResourceError(`User ${id} not found`);
     }
   }
 

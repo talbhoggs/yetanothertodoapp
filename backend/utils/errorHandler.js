@@ -5,8 +5,14 @@ const logger = getLogger(module);
 
 const trustedError = (error) => {
   if (error instanceof BaseError) {
+    logger.warn(error);
     return error.isOperational;
   }
+  if (error instanceof SyntaxError) {
+    logger.warn(error);
+    return true;
+  }
+
   return false;
 };
 

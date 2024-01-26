@@ -2,9 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 
-const hashPassword = (password) => {
-  return bcrypt.hashSync(password, Number(process.env.SALT));
-}
+const hashPassword = (password) => bcrypt.hashSync(password, Number(process.env.SALT));
 // validPassword
 
 const validatePassword = async (enteredPassword, savedPassword) => (await this.hashPassword(enteredPassword, process.env.SALT)) === savedPassword;
