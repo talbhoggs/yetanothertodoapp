@@ -5,13 +5,12 @@ const config = require('../config');
 const hashPassword = (password) => bcrypt.hashSync(password, Number(process.env.SALT));
 // validPassword
 
-const validatePassword = async (enteredPassword, savedPassword) => (await this.hashPassword(enteredPassword, process.env.SALT)) === savedPassword;
-
+const validatePassword = (enteredPassword, savedPassword) => bcrypt.compareSync(enteredPassword, savedPassword);
 // generateToken
 
 const generateToken = (payload) => {
   try {
-    return jwt.sign(payload, process.env.ACCES_TOKEN_KEY, { expiresIn: config.ACCESS_TOKEN_EXPIRY });
+    return jwt.sign(payload, process.env.ACCESS_TOKEN_KEY, { expiresIn: config.ACCESS_TOKEN_EXPIRY });
   } catch (err) {
     return err;
   }
@@ -29,7 +28,7 @@ const generateRefreshToken = (payload) => {
 const validateToken = async (req) => {
   try {
     const signature = req.get('Authorization');
-    const payload = jwt.verify(signature.split(' ')[1], process.env.ACCES_TOKEN_KEY);
+    const payload = jwt.verify(signature.split(' ')[1], process.env.ACCESS_TOKEN_KEY);
     req.user = payload;
     return true;
   } catch (err) {

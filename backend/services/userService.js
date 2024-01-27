@@ -1,7 +1,9 @@
 const UserRepository = require('../repository/userRepository');
 const { ResourceError } = require('../utils/errors');
 
-const { hashPassword } = require('../utils');
+const {
+  hashPassword, generateToken, generateRefreshToken, validatePassword,
+} = require('../utils');
 
 class UserService {
   constructor() {
@@ -26,8 +28,47 @@ class UserService {
     }
   }
 
-  async updateUser(id, {username, password, active, picturePath}) {
+  async signIn({ username, password }) {
+      // validate the input
+      if (!username || !password) {
+        throw new ResourceError('Username and Password are required');
+      }
+      // search for existing user
+      const existingUser = await this.getUserName(username);
+      console.log(existingUser);
+      if (!existingUser) {
+        throw new ResourceError('Invalid username or password');
+      }
+      // validate password
+      if (!validatePassword(password, existingUser.password)) {
+        throw new ResourceError('Invalid username or password');
+      }
+      const accessToken = generateToken(
+        {
+          userInfo: {
+            username: existingUser.username,
+            roles: existingUser.roles,
+          },
+        },
+      );
 
+      const refreshToken = generateRefreshToken(
+        {
+          username: existingUser.username,
+        },
+      );
+      const payload = {
+        username: existingUser.username,
+        roles: existingUser.roles,
+        accessToken,
+        refreshToken,
+      };
+      return payload;
+  }
+
+  async updateUser(id, {
+    username, password, active, picturePath,
+  }) {
     try {
       const existingUser = await this.getUserById(id);
       if (!existingUser) {
@@ -42,7 +83,7 @@ class UserService {
         existingUser.password = password;
       }
 
-      if(active !== undefined && existingUser.active !== Boolean(active)) {
+      if (active !== undefined && existingUser.active !== Boolean(active)) {
         existingUser.active = !existingUser.active;
       }
 

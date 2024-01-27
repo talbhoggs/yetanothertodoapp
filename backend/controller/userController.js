@@ -18,6 +18,22 @@ const signUp = async (req, res, next) => {
   }
 };
 
+const signIn = async (req, res, next) => {
+  try {
+    const payload = await userService.signIn(req.body);
+
+    return res.status(200).json({
+      successful: true,
+      message: 'Access granted',
+      timestamp: Date.now(),
+      status: 200,
+      data: payload,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 const deleteUser = async (req, res, next) => {
   try {
     await userService.deleteUser(req.params);
@@ -62,5 +78,5 @@ const getAllUsers = async (req, res, next) => {
 };
 
 module.exports = {
-  signUp, getAllUsers, deleteUser, updateUser,
+  signIn, signUp, getAllUsers, deleteUser, updateUser,
 };
