@@ -55,6 +55,11 @@ class UserRepository {
       throw new ResourceError('Unable to get all users');
     }
   }
+
+  async getTodosByUserId(id) {
+    const user = await this.getUserById(id);
+    return await user.populate('todos');
+  }
 }
 
 module.exports = UserRepository;
