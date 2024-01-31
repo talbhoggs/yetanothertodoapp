@@ -29,41 +29,41 @@ class UserService {
   }
 
   async signIn({ username, password }) {
-      // validate the input
-      if (!username || !password) {
-        throw new ResourceError('Username and Password are required');
-      }
-      // search for existing user
-      const existingUser = await this.getUserName(username);
-      console.log(existingUser);
-      if (!existingUser) {
-        throw new ResourceError('Invalid username or password');
-      }
-      // validate password
-      if (!validatePassword(password, existingUser.password)) {
-        throw new ResourceError('Invalid username or password');
-      }
-      const accessToken = generateToken(
-        {
-          userInfo: {
-            username: existingUser.username,
-            roles: existingUser.roles,
-          },
-        },
-      );
-
-      const refreshToken = generateRefreshToken(
-        {
+    // validate the input
+    if (!username || !password) {
+      throw new ResourceError('Username and Password are required');
+    }
+    // search for existing user
+    const existingUser = await this.getUserName(username);
+    console.log(existingUser);
+    if (!existingUser) {
+      throw new ResourceError('Invalid username or password');
+    }
+    // validate password
+    if (!validatePassword(password, existingUser.password)) {
+      throw new ResourceError('Invalid username or password');
+    }
+    const accessToken = generateToken(
+      {
+        userInfo: {
           username: existingUser.username,
+          roles: existingUser.roles,
         },
-      );
-      const payload = {
+      },
+    );
+
+    const refreshToken = generateRefreshToken(
+      {
         username: existingUser.username,
-        roles: existingUser.roles,
-        accessToken,
-        refreshToken,
-      };
-      return payload;
+      },
+    );
+    const payload = {
+      username: existingUser.username,
+      roles: existingUser.roles,
+      accessToken,
+      refreshToken,
+    };
+    return payload;
   }
 
   async updateUser(id, {
@@ -136,6 +136,14 @@ class UserService {
   async getUserById(_id) {
     try {
       return await this.userRepository.getUserById(_id);
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async getUserTodos(id) {
+    try {
+      return await this.userRepository.getTodosByUserId(id);
     } catch (err) {
       throw err;
     }

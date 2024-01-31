@@ -4,17 +4,21 @@ const { Schema } = mongoose;
 
 const TodoSchema = new Schema(
   {
-    descripton: {
+    userId: {
+      type: String,
+      required: true,
+    },
+    description: {
       type: String,
       required: true,
     },
     targetDate: {
-      type: String,
-      required: true,
+      type: Date,
+      // required: true,
     },
     status: {
-      type: [String],
-      default: ['open'], // other values are inprogress, done, skipped
+      type: String,
+      default: 'open', // other values are inprogress, done, skipped
     },
   },
   {
