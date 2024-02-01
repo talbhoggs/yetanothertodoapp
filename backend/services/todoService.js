@@ -40,6 +40,35 @@ class TodoService {
     return await existingUser.save();
   }
 
+  async updateTodo({ userId, todoId }, { description, targetDate, status }) {
+    const todo = {};
+    if (!userId || !description) {
+      throw new ResourceError('User Id and Description are required');
+    }
+
+    todo.userId = userId;
+    todo.description = description;
+
+    if (targetDate) {
+      todo.targetDate = targetDate;
+    }
+
+    if (status) {
+      todo.status = status;
+    }
+    const existingUser = await this.userRepository.getUserById(userId);
+
+    if (!existingUser) {
+      throw new ResourceError(`User ${userId} not found`);
+    }
+
+    const existingTodo = await this.todoRepository.findOneAndUpdate(todoId, todo);
+    if (!existingTodo) {
+      throw new ResourceError(`Todo ${todoId} not found`);
+    }
+    return existingTodo;
+  }
+
   async getTodoById({ userId, todoId }) {
     // check if existing user
     const existingUser = await this.userRepository.getUserById(userId);
