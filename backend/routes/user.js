@@ -8,7 +8,7 @@ const {
 } = require('../controller/userController');
 
 const {
-  getTodoById, createTodo, getTodosByUserId, deleteTodo,
+  createTodo, updateTodo, getTodoById, getTodosByUserId, deleteTodo,
 } = require('../controller/todoController');
 
 const BASE_URI = `/${config.APP_NAME}/${config.API_VERSION}/${config.API_BASE}`;
@@ -22,4 +22,5 @@ router.post(`${BASE_URI}/users/:id/todos`, createTodo);
 router.get(`${BASE_URI}/users/:id/todos`, getTodosByUserId);
 router.delete(`${BASE_URI}/users/:userId/todos/:todoId`, deleteTodo);
 router.get(`${BASE_URI}/users/:userId/todos/:todoId`, getTodoById);
+router.put(`${BASE_URI}/users/:userId/todos/:todoId`, updateTodo);
 module.exports = router;

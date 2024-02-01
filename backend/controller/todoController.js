@@ -19,6 +19,22 @@ const createTodo = async (req, res, next) => {
   }
 };
 
+const updateTodo = async (req, res, next) => {
+  try {
+    const payload = await todoService.updateTodo(req.params, req.body);
+
+    return res.status(200).json({
+      successful: true,
+      message: 'Updated successfully!',
+      timestamp: Date.now(),
+      status: 200,
+      data: payload,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 const getTodosByUserId = async (req, res, next) => {
   try {
     const payload = await todoService.getTodosByUserId(req.params);
@@ -64,5 +80,5 @@ const getTodoById = async (req, res, next) => {
   }
 };
 module.exports = {
-  getTodoById, createTodo, getTodosByUserId, deleteTodo,
+  createTodo, updateTodo, getTodoById, getTodosByUserId, deleteTodo,
 };
