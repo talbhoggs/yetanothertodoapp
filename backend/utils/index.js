@@ -1,6 +1,11 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
+const getLogger = require('./logger');
+
+const logger = getLogger(module);
+
+const { ResourceError } = require('./errors');
 
 const hashPassword = (password) => bcrypt.hashSync(password, Number(process.env.SALT));
 // validPassword
@@ -25,17 +30,18 @@ const generateRefreshToken = (payload) => {
   }
 };
 
-const validateToken = async (req) => {
+const validateSigniture = (req) => {
   try {
-    const signature = req.get('Authorization');
-    const payload = jwt.verify(signature.split(' ')[1], process.env.ACCESS_TOKEN_KEY);
-    req.user = payload;
-    return true;
+    let token = req.header('Authorization');
+    token = token.slice(7, token.length).trimLeft();
+    const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_KEY);
+    req.userInfo = decodedToken.userInfo;
   } catch (err) {
-    return false;
+    logger.warn(err);
+    throw new ResourceError('Access denied', 401);
   }
 };
 
 module.exports = {
-  hashPassword, validatePassword, generateToken, generateRefreshToken,
+  hashPassword, validatePassword, generateToken, generateRefreshToken, validateSigniture,
 };

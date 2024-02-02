@@ -46,6 +46,7 @@ class UserService {
     const accessToken = generateToken(
       {
         userInfo: {
+          userId: existingUser._id,
           username: existingUser.username,
           roles: existingUser.roles,
         },
