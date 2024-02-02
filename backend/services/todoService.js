@@ -9,7 +9,6 @@ class TodoService {
   }
 
   async createTodo({ id }, { description, targetDate, status }) {
-
     if (!id || !description) {
       throw new ResourceError('User Id and Description are required');
     }
@@ -24,7 +23,7 @@ class TodoService {
       userId: id,
       description,
       ...(targetDate && { targetDate }),
-      ...(status && { status })
+      ...(status && { status }),
     };
 
     // create a new todo
@@ -37,12 +36,11 @@ class TodoService {
   }
 
   async updateTodo({ userId, todoId }, { description, targetDate, status }) {
-
     if (!userId || !description) {
       throw new ResourceError('User Id and Description are required');
     }
 
-   const existingUser = await this.userRepository.getUserById(userId);
+    const existingUser = await this.userRepository.getUserById(userId);
 
     if (!existingUser) {
       throw new ResourceError(`User ${userId} not found`);
@@ -52,7 +50,7 @@ class TodoService {
       userId,
       description,
       ...(targetDate && { targetDate }),
-      ...(status && { status })
+      ...(status && { status }),
     };
 
     return await this.todoRepository.findOneAndUpdate(todoId, todo);
