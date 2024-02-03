@@ -42,6 +42,10 @@ const validateSigniture = (req) => {
   }
 };
 
+const verifyAccess = (req, roles) => {
+  const valid = req.userInfo.roles.some((role) => roles.includes(role));
+  if (!valid) throw new ResourceError('Forbidden', 403);
+};
 module.exports = {
-  hashPassword, validatePassword, generateToken, generateRefreshToken, validateSigniture,
+  hashPassword, validatePassword, generateToken, generateRefreshToken, validateSigniture, verifyAccess,
 };

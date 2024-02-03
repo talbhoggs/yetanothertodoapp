@@ -35,7 +35,6 @@ class UserService {
     }
     // search for existing user
     const existingUser = await this.getUserName(username);
-    console.log(existingUser);
     if (!existingUser) {
       throw new ResourceError('Invalid username or password');
     }
