@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YetAnotherTodo App</title>
+     <style>
+        * {
+            padding: 0;
+            margin:0;
+            box-sizing: border-box;
+        }
+
+        image {
+            display: block;
+        }
+
+        body {
+            font-family: "Segoe","Segoe UI","Arial","sans-serif";
+            background-color: #FAF9F8;
+        }
+
+        input, button {
+            font-size: inherit;
+        }
+
+        /* navigation */
+        nav {
+            background: #2564cf;
+            color: #fff;
+            height:50px;
+            display: flex;
+        }
+
+        nav h2 {
+            padding: 0.7rem 1rem  1rem 0.7rem;
+        }
+        main {
+            height: 100vh;
+            display:flex;
+            flex-direction: row;
+        }
+
+
+        section {
+            display: flex;
+            flex-direction: column;
+            margin: 0 1rem 1rem 1rem;
+            font-size: 0.9rem;
+            height: 100%;
+        }
+
+        section li {
+            background-color: #FFF;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            list-style-type: none;
+
+            display:flex;
+            /*text-decoration: line-through;*/
+        }
+
+        section li input:focus{
+            outline: none;
+        }
+
+        section li input[type="text"] {
+            border: none;
+            display: inline-block;
+            width: 100%;
+            background-color: #FFF;
+        }
+
+        section li input[type=checkbox] {
+            display: inline-block;
+            margin-right: 0.7rem;
+        }
+
+        section li span {
+            display: inline-block;
+            margin-right:0.7rem;
+        }
+
+        .content li {
+            -webkit-box-shadow: 5px 5px 5px -5px rgba(0,0,0,0.53);
+            -moz-box-shadow: 5px 5px 5px -5px rgba(0,0,0,0.53);
+            box-shadow: 5px 5px 5px -5px rgba(0,0,0,0.53);
+        }
+
+        .content {
+            width: 100%;
+        }
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0 1.5rem 1.5rem;
+        }
+        .content-header h3 {
+            padding-bottom: 0.8rem;
+        }
+       
+        .details {
+            width: 400px;
+            padding:1rem;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: -3px 1px 5px -4px rgba(0,0,0,0.77);
+            -webkit-box-shadow: -3px 1px 5px -4px rgba(0,0,0,0.77);
+            -moz-box-shadow: -3px 1px 5px -4px rgba(0,0,0,0.77);
+        }
+
+        .details-footer {
+            display: flex;
+            justify-content: space-between;
+            position: sticky;
+            bottom: 0;
+            padding: 1rem 1rem;
+            border-top: 1px dotted grey;
+        }
+        /*input:focus,
+        select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}*/
+     </style>
+</head>
+<body>
+<head>
+    <nav>
+        <h2>YetAnotherTodo</h2>
+    </nav>
+</head>
+<main>
+    <section class="content">
+        <div class="content-header">
+            <div>
+            <h3>My Day:</h3>
+            <span>Monday, Feb 5</span>
+            </div>
+            <span> Sort </span>
+        </div>
+        <ul>
+            <li><span>+ </span> <input type="text" placeholder="Add Todo:"/></li>
+            <li><input type="checkbox" /> Learn React 18</li>
+            <li><input type="checkbox" /> Task number 1</li>
+        </ul>
+    </section>
+    <section class="details">
+        <ul>
+            <li><span>+ </span> <input type="text" placeholder="Add Todo:"/></li>
+            <li><input type="date" /></li>
+        </ul> 
+
+        <div class="details-footer">
+            <span>hide</span>
+            <span>delete</span>
+        </div>
+    </section>
+   
+</main>
+ 
+</body>
+</html>
