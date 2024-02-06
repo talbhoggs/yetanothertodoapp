@@ -25,6 +25,11 @@
         }
 
         /* navigation */
+        header {
+            position: fixed;
+            top:0;
+            width: 100%;
+        }
         nav {
             background: #2564cf;
             color: #fff;
@@ -38,7 +43,7 @@
         main {
             height: 100vh;
             display:flex;
-            flex-direction: row;
+            padding-top: 50px;
         }
 
 
@@ -80,6 +85,11 @@
             display: inline-block;
             margin-right:0.7rem;
         }
+        
+        section li:hover {
+            background-color: #eff6fc;
+            cursor: pointer;
+        }
 
         .content li {
             -webkit-box-shadow: 5px 5px 5px -5px rgba(0,0,0,0.53);
@@ -89,7 +99,17 @@
 
         .content {
             width: 100%;
+            /*margin-right:480px; variable*/ 
         }
+
+        .content-details {
+            position: fixed;
+            height: 100%;
+            background-color: #FAF9F8;
+            right:0;
+            display: none;
+        }
+
         .content-header {
             display: flex;
             justify-content: space-between;
@@ -117,22 +137,91 @@
             padding: 1rem 1rem;
             border-top: 1px dotted grey;
         }
-        /*input:focus,
-        select:focus,
-textarea:focus,
-button:focus {
-    outline: none;
-}*/
+
+
+        .show-content-details {
+            z-index: 1;
+            display: block;
+        }
+
+        .min-content {
+            margin-right:440px;
+        }
+
+        input[type=button] {
+            height: 32px;
+            width: auto;
+            padding: 0 8px;
+            font-size: 0.8rem;
+            background-color: #fff;
+            text-align: right;
+            cursor: pointer;
+            border: 1px solid grey;
+        }
+
+        /* add todo */
+        form {
+            margin-bottom: 1rem;
+        }
+
+        .add-todo {
+            background-color: #FFF;
+            list-style-type: none;
+            display:flex;
+            border: 0.5px dotted grey;
+            border-radius: 4px;
+        }
+
+        .add-todo span {
+            display: inline-block;
+            padding:1rem 0 1rem 1rem;
+        }
+
+        .add-todo input[type=text] {
+            padding: 1rem;
+            border: none;
+            display: inline-block;
+            width: 100%;
+        }
+
+       .add-todo input:focus {
+            outline: none;
+        }
+
+        .due-date {
+            padding: 0.3rem;
+            display: flex;
+            justify-content: space-between;
+
+            border: 0.5px dotted grey;
+            -webkit-box-shadow: 5px 5px 5px -5px rgba(0,0,0,0.53);
+            -moz-box-shadow: 5px 5px 5px -5px rgba(0,0,0,0.53);
+            box-shadow: 5px 5px 5px -5px rgba(0,0,0,0.53);
+        }
+ 
+        .due-date [type=date] {
+            border: none;
+        }
+
+       .due-date span {
+            padding-top:0.4rem;
+            margin-left: 0.5rem;
+        }
+        .hidden {
+           display: none; 
+        }
+
      </style>
 </head>
 <body>
-<head>
+<header>
     <nav>
         <h2>YetAnotherTodo</h2>
     </nav>
-</head>
+</header>
 <main>
-    <section class="content">
+    <!--<section class="content min-content">-->
+    <section class="content min-content">
         <div class="content-header">
             <div>
             <h3>My Day:</h3>
@@ -140,25 +229,42 @@ button:focus {
             </div>
             <span> Sort </span>
         </div>
+        <form class="addform">
+        <!--
         <ul>
-            <li><span>+ </span> <input type="text" placeholder="Add Todo:"/></li>
+            <li><span>+ </span> <input type="text" placeholder="Add Todo:"/>
+        </ul>
+        -->
+            <div class="add-todo">
+                <span>+ </span> <input type="text" placeholder="Add Todo:"/>
+            </div>
+            <div class="due-date">
+                <span>Due Date : <input type="date" /></span> <input type="button" value="Add" />
+            </div>
+        </form>
+        <ul>
             <li><input type="checkbox" /> Learn React 18</li>
+            <li><input type="checkbox" /> Task number 1</li>
             <li><input type="checkbox" /> Task number 1</li>
         </ul>
     </section>
-    <section class="details">
-        <ul>
-            <li><span>+ </span> <input type="text" placeholder="Add Todo:"/></li>
-            <li><input type="date" /></li>
-        </ul> 
 
-        <div class="details-footer">
-            <span>hide</span>
-            <span>delete</span>
-        </div>
-    </section>
-   
+    <!--<div class="content-details show-content-details">-->
+    <div class="content-details show-content-details">
+        <section class="details">
+            <div>
+            <ul>
+                <li><span>+ </span> <input type="text" placeholder="Add Todo:"/></li>
+                <li><input type="date" /></li>
+            </ul> 
+            <input type="button" value="Save" />
+            </div>
+            <div class="details-footer">
+                <span>hide</span>
+                <span>delete</span>
+            </div>
+        </section>
+    </div>
 </main>
- 
 </body>
 </html>
