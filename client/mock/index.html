@@ -5,11 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YetAnotherTodo App</title>
     <link href="style.css" rel="stylesheet">
+    <style>
+
+        .search {
+            padding:0.5rem;
+        }
+        .search input {
+            height: 20px;
+            min-width: 380px;
+            border-radius: 4px;
+        }
+        .user-details {
+            display: flex;
+            width: 200px;
+            justify-content: space-between;
+        }
+        .user-details img {
+            border-radius: 50%;
+            margin-right: 1rem;
+            margin-top:0.2rem;
+        }
+        .user-details span {
+           margin-top: 1rem;
+        }
+    </style>
 </head>
 <body>
 <header>
     <nav>
         <h2>YetAnotherTodo</h2>
+        <form class="search"><input type="text" placeholder="Search"/> </form>
+        <div class="user-details">
+           <span>Welcome Charles</span>
+           <img src="profile.jpg" width="45" height="45"/>
+        </div>
     </nav>
 </header>
 <main>
@@ -48,7 +77,7 @@
         <section class="details">
             <div class="add-details">
                 <div class="add-todo">
-                    <span>+ </span> <input type="text" />
+                    <span><input class="checkbox-round" type="checkbox" /></span> <input type="text" />
                 </div>
                 <input type="date" />
                 <div>
