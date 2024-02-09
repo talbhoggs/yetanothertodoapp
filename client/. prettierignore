@@ -1,0 +1,10 @@
+node_modules
+coverage
+.gitignore
+.husky
+.github
+dist
+*.json
+build
+.eslintrc.cjs
+*.md
